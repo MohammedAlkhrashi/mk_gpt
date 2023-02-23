@@ -21,7 +21,7 @@ def eval(model, dataset, loss_fn):
     for set_ in ["train", "test"]:
         total_loss = 0
         for i in range(EVAL_ITERS):
-            is_train = "set_" == "train"
+            is_train = set_ == "train"
             x, y = dataset.sample_batch(train=is_train)
             x, y = x.cuda(), y.cuda()
             pred = model(x)
