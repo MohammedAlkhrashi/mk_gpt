@@ -21,3 +21,36 @@ class BigramModel(nn.Module):
             predicted_next_word = torch.multinomial(probs, num_samples=1)
             s = torch.cat((s, predicted_next_word), dim=1)
         return s
+
+
+# TODO: implement below:
+class SelfAttentionHead(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def forward(self, x):
+        return x
+
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def forward(self, x):
+        return x
+
+
+class MLP(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def forward(self, x):
+        return x
+
+
+class GPT(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def forward(self, x):
+        return x

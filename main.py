@@ -31,7 +31,7 @@ def eval(model, dataset, loss_fn):
 
 def train(model, dataset: Dataset, loss_fn, optim, num_iters, eval_every):
     model = model.cuda()
-    for i in range(num_iters):
+    for i in tqdm(range(num_iters), leave=True):
         if i % eval_every == 0 or i == num_iters - 1:
             eval(model, dataset, loss_fn)
 
@@ -47,7 +47,7 @@ def train(model, dataset: Dataset, loss_fn, optim, num_iters, eval_every):
 
 def inspect_model_generation_quality(model, dataset):
     start_seq = dataset.prepare_input(["\n"])
-    generated_seq = model.generate(start_seq, max_tokens=100)
+    generated_seq = model.generate(start_seq, max_tokens=10000)
     decoded_seq = dataset.decode(generated_seq.numpy().tolist()[0])
     print(decoded_seq)
 
@@ -58,7 +58,6 @@ def main():
     dataset = Dataset(
         corpus=text, train_ratio=TRAIN_RATIO, batch_size=BATCH_SIZE, context=CONTEXT
     )
-    x, y = dataset.sample_batch()
 
     model = BigramModel(
         vocab_size=len(dataset.vocab),
